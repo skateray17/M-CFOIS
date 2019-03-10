@@ -6,20 +6,20 @@ const decryptMessage = 'ЛУФШФЩЛ';
 const newDecryptMessage = 'ЛИКШЙПЛ';
 
 const encrypt5 = (alphabet, key, message) => {
-    const keyMap = {};
-    [...alphabet].forEach((e, i) => keyMap[e] = key.charAt(i));
-    return [...message].map(e => keyMap[e]).join('');
+  const keyMap = {};
+  [...alphabet].forEach((e, i) => keyMap[e] = key.charAt(i));
+  return [...message].map(e => keyMap[e]).join('');
 }
 
 const decrypt5 = (alphabet, key, message) => {
   const UCAlphabet = alphabet.split('');
   return [...message]
-  .map((e, i) => UCAlphabet[(
-    UCAlphabet.length + UCAlphabet.indexOf(e) - UCAlphabet.indexOf(key[i % key.length])
+    .map((e, i) => UCAlphabet[(
+      UCAlphabet.length + UCAlphabet.indexOf(e) - UCAlphabet.indexOf(key[i % key.length])
     ) % UCAlphabet.length])
     .join('');
-  }
-  
+}
+
 console.log(`result of encrypting ${encryptMessage} with key ${encryptKey} is ${encrypt5(ruAlphabet, encryptKey, encryptMessage)}`);
 
 console.log(`Probably there was wrong key or it was encrypted via shift cipher: ${decrypt5(ruAlphabet.toUpperCase(), decryptKey, decryptMessage)}`);
