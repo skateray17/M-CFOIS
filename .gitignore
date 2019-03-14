@@ -1,0 +1,17 @@
+*sublime*
+.vs_code
+.DS_Store
+.idea
+.vs
+Debug
+
+*.log
+*.lock
+*-lock.json
+
+*.sln
+*.vcxproj*
+
+dist
+coverage
+node_modules
