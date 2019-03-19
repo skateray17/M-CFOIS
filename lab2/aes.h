@@ -25,12 +25,3 @@ void aes_key_schedule_128(const uint8_t *key, uint8_t *roundkeys);
  */
 void aes_encrypt_128(const uint8_t *roundkeys, const uint8_t *plaintext, uint8_t *ciphertext);
 
-/**
- * Block decryption. The length of plain and cipher should be one block (16 bytes).
- * The ciphertext and plaintext may point to the same memory
- *
- * @param roundkeys     round keys
- * @param ciphertext    cipher text
- * @param plaintext     plain text
- */
-void aes_decrypt_128(const uint8_t *roundkeys, const uint8_t *ciphertext, uint8_t *plaintext);

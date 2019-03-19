@@ -1,14 +1,51 @@
 #include "woow.h"
-#include <cstdlib>
-#include <cstring>
+#include <iostream>
+#include <ctime>
+#include <fstream>
 
 int main() {
-	example();
-	const char* message = "Wow, that is so secure message. I think it's unbreakable. Woof woof";
-	char enc[68];
-	uint8_t key[] = {
-			0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-			0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-	};
-	woow(key, message, enc);
+	srand(time(NULL));
+	std::cout << "Hi, what type of operation do you want to perform?\n(E)ncryption\n(D)ecription\n";
+	char operation;
+	std::cin >> operation;
+	uint8_t key[16];
+	std::string filePath;
+	if (operation == 'E' || operation == 'e') {
+		std::cout << "Enter path to file with key\n";
+		std::cin >> filePath;
+		std::ifstream kin(filePath, std::ios::binary);
+		for (size_t i = 0; i < 16; i++) {
+			kin >> key[i];
+		}
+		std::cout << "Enter path to file for encryption\n";
+		std::cin >> filePath;
+		std::ifstream in(filePath, std::ios::binary);
+		std::vector<uint8_t> buf(std::istreambuf_iterator<char>(in), {});
+		std::vector<uint8_t> enc = encrypt(key, buf);
+		std::cout << "Enter path to file for result\n";
+		std::cin >> filePath;
+		std::ofstream cipher(filePath, std::ios::binary);
+		std::copy(enc.begin(), enc.end(), std::ostreambuf_iterator<char>(cipher));
+		std::cout << "Encryption completed!";
+		return 0;
+	}
+	if (operation == 'D' || operation == 'd') {
+		std::cout << "Enter path to file with key\n";
+		std::cin >> filePath;
+		std::ifstream kin(filePath, std::ios::binary);
+		for (size_t i = 0; i < 16; i++) {
+			kin >> key[i];
+		}		std::cout << "Enter path to file for decryption\n";
+		std::cin >> filePath;
+		std::ifstream in(filePath, std::ios::binary);
+		std::vector<uint8_t> enc(std::istreambuf_iterator<char>(in), {});
+		std::vector<uint8_t> v = decrypt(key, enc);
+		std::cout << "Enter path to file for result\n";
+		std::cin >> filePath;
+		std::ofstream output(filePath, std::ios::binary);
+		std::copy(v.begin(), v.end(), std::ostreambuf_iterator<char>(output));
+		std::cout << "Decryption completed!";
+		return 0;
+	}
+	std::cout << "Wrong operation type, terminating program :c";
 }

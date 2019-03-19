@@ -1,7 +1,8 @@
 #pragma once
 
 #include "aes.h"
+#include <string>
+#include <vector>
 
-void example();
-
-void woow(const uint8_t *key, const char* message, char* encryptedMessage);
+std::vector<uint8_t> encrypt(const uint8_t *key, std::vector<uint8_t> message);
+std::vector<uint8_t> decrypt(const uint8_t *key, std::vector<uint8_t> encryptedMessage);
