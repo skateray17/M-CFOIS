@@ -11,7 +11,11 @@ void addPadding(std::vector<uint8_t>& message) {
 
 void removePadding(std::vector<uint8_t>& message) {
 	size_t paddLength = message.back();
-	while (paddLength--){
+	message.pop_back();
+	while (--paddLength){
+		if (message.back()) {
+			throw "Wrong padding";
+		}
 		message.pop_back();
 	}
 }
