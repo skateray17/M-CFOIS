@@ -1,4 +1,4 @@
-#include "woow.h"
+#include "woow.hh"
 #include <iostream>
 #include <ctime>
 #include <fstream>

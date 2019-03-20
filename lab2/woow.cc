@@ -1,4 +1,4 @@
-#include "woow.h"
+#include "woow.hh"
 
 void addPadding(std::vector<uint8_t>& message) {
 	size_t paddLength = 16 - (message.size() % 16);
