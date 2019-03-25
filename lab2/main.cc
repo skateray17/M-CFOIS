@@ -9,7 +9,7 @@ int main() {
 	char operation;
 	std::cin >> operation;
 	uint8_t key[16];
-	uint8_t IV[8];
+	uint64_t IV[2];
 	std::string filePath;
 	if (operation == 'E' || operation == 'e') {
 		std::cout << "Enter path to file with key\n";
@@ -21,7 +21,7 @@ int main() {
 		//std::cout << "Enter path to file with IV\n";
 		//std::cin >> filePath;
 		//std::ifstream ivin(filePath, std::ios::binary);
-		for (size_t i = 0; i < 8; i++) {
+		for (size_t i = 0; i < 2; i++) {
 			kin>> IV[i];
 		}
 		std::cout << "Enter path to file for encryption\n";
@@ -46,7 +46,7 @@ int main() {
 		//std::cout << "Enter path to file with IV\n";
 		//std::cin >> filePath;
 		//std::ifstream ivin(filePath, std::ios::binary);
-		for (size_t i = 0; i < 8; i++) {
+		for (size_t i = 0; i < 2; i++) {
 			kin >> IV[i];
 		}
 		std::cout << "Enter path to file for decryption\n";
