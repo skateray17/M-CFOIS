@@ -9,6 +9,7 @@ int main() {
 	char operation;
 	std::cin >> operation;
 	uint8_t key[16];
+	uint8_t IV[8];
 	std::string filePath;
 	if (operation == 'E' || operation == 'e') {
 		std::cout << "Enter path to file with key\n";
@@ -17,11 +18,17 @@ int main() {
 		for (size_t i = 0; i < 16; i++) {
 			kin >> key[i];
 		}
+		//std::cout << "Enter path to file with IV\n";
+		//std::cin >> filePath;
+		//std::ifstream ivin(filePath, std::ios::binary);
+		for (size_t i = 0; i < 8; i++) {
+			kin>> IV[i];
+		}
 		std::cout << "Enter path to file for encryption\n";
 		std::cin >> filePath;
 		std::ifstream in(filePath, std::ios::binary);
 		std::vector<uint8_t> buf(std::istreambuf_iterator<char>(in), {});
-		std::vector<uint8_t> enc = encrypt(key, buf);
+		std::vector<uint8_t> enc = encrypt(key, IV, buf);
 		std::cout << "Enter path to file for result\n";
 		std::cin >> filePath;
 		std::ofstream cipher(filePath, std::ios::binary);
@@ -35,11 +42,18 @@ int main() {
 		std::ifstream kin(filePath, std::ios::binary);
 		for (size_t i = 0; i < 16; i++) {
 			kin >> key[i];
-		}		std::cout << "Enter path to file for decryption\n";
+		}		
+		//std::cout << "Enter path to file with IV\n";
+		//std::cin >> filePath;
+		//std::ifstream ivin(filePath, std::ios::binary);
+		for (size_t i = 0; i < 8; i++) {
+			kin >> IV[i];
+		}
+		std::cout << "Enter path to file for decryption\n";
 		std::cin >> filePath;
 		std::ifstream in(filePath, std::ios::binary);
 		std::vector<uint8_t> enc(std::istreambuf_iterator<char>(in), {});
-		std::vector<uint8_t> v = decrypt(key, enc);
+		std::vector<uint8_t> v = decrypt(key, IV, enc);
 		std::cout << "Enter path to file for result\n";
 		std::cin >> filePath;
 		std::ofstream output(filePath, std::ios::binary);

@@ -44,24 +44,13 @@ std::vector<uint8_t> encr(const uint8_t *key, const uint8_t* IV, std::vector<uin
 	return encryptedMessage;
 }
 
-std::vector<uint8_t> encrypt(const uint8_t *key, std::vector<uint8_t> message) {
-	uint8_t IV[8];
-	for (size_t i = 0; i < 8; i++) {
-		*(IV + i) = rand(); // random IV
-	}
+std::vector<uint8_t> encrypt(const uint8_t *key, const uint8_t *IV, std::vector<uint8_t> message) {
 	addPadding(message);
 	message = encr(key, IV, message);
-	std::vector<uint8_t> res(IV, IV + 8);
-	res.insert(res.end(), std::make_move_iterator(message.begin()), std::make_move_iterator(message.end()));
-	return res;
+	return message;
 }
 
-std::vector<uint8_t> decrypt(const uint8_t *key, std::vector<uint8_t> encryptedMessage) {
-	uint8_t IV[8];
-	for (size_t i = 0; i < 8; i++) {
-		*(IV + i) = encryptedMessage[i];
-	}
-	encryptedMessage.erase(encryptedMessage.begin(), encryptedMessage.begin() + 8);
+std::vector<uint8_t> decrypt(const uint8_t *key, const uint8_t *IV, std::vector<uint8_t> encryptedMessage) {
 	encryptedMessage = encr(key, IV, encryptedMessage);
 	removePadding(encryptedMessage);
 	return encryptedMessage;
