@@ -9,20 +9,20 @@ int main() {
 	char operation;
 	std::cin >> operation;
 	uint8_t key[16];
-	uint64_t IV[2];
+	uint8_t IV[16];
 	std::string filePath;
 	if (operation == 'E' || operation == 'e') {
 		std::cout << "Enter path to file with key\n";
 		std::cin >> filePath;
 		std::ifstream kin(filePath, std::ios::binary);
 		for (size_t i = 0; i < 16; i++) {
-			kin >> key[i];
+			kin >> std::noskipws >> key[i];
 		}
 		//std::cout << "Enter path to file with IV\n";
 		//std::cin >> filePath;
 		//std::ifstream ivin(filePath, std::ios::binary);
-		for (size_t i = 0; i < 2; i++) {
-			kin>> IV[i];
+		for (size_t i = 0; i < 16; i++) {
+			kin >> std::noskipws >> IV[i];
 		}
 		std::cout << "Enter path to file for encryption\n";
 		std::cin >> filePath;
@@ -41,13 +41,13 @@ int main() {
 		std::cin >> filePath;
 		std::ifstream kin(filePath, std::ios::binary);
 		for (size_t i = 0; i < 16; i++) {
-			kin >> key[i];
+			kin >> std::noskipws >> key[i];
 		}		
 		//std::cout << "Enter path to file with IV\n";
 		//std::cin >> filePath;
 		//std::ifstream ivin(filePath, std::ios::binary);
-		for (size_t i = 0; i < 2; i++) {
-			kin >> IV[i];
+		for (size_t i = 0; i < 16; i++) {
+			kin >> std::noskipws >> IV[i];
 		}
 		std::cout << "Enter path to file for decryption\n";
 		std::cin >> filePath;
