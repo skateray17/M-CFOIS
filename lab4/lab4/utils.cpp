@@ -558,7 +558,7 @@ void factorize(const T &n, std::map<T, unsigned> &result, T2 unused) {
 			}
 			else {
 				T div;
-				// fast probabilistic test
+				// fast probabilistic tests
 				div = pollard_monte_carlo(n);
 				if (div == 1)
 					div = pollard_rho(n);
@@ -566,7 +566,7 @@ void factorize(const T &n, std::map<T, unsigned> &result, T2 unused) {
 					div = pollard_p_1(n);
 				if (div == 1)
 					div = pollard_bent(n);
-				// 100% Ferma tesr
+				// 100% Ferma test
 				if (div == 1)
 					div = ferma(n, unused);
 				// recursively process dividers
