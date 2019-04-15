@@ -5,7 +5,7 @@
 
 unsigned LFSR_Galois(const unsigned polynomR, unsigned& s, const unsigned len) {
 	if (s & 1) {
-		s = ((s ^ polynomR) >> 1) | (1 << len);
+		s = ((s ^ polynomR) >> 1) | (1 << (len - 1));
 		return 1;
 	}
 	s >>= 1;
